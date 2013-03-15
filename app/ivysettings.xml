@@ -10,6 +10,9 @@
         <chain name="chained" returnFirst="true">
             <resolver ref="local" />
             <resolver ref="maven2" />
+            <url name="bugsense" m2compatible="true">
+                <artifact pattern="http://mvn.bugsense.com/[organisation]/[module]/[revision]/[artifact]-[revision].[ext]" />
+            </url>
         </chain>
     </resolvers>
 

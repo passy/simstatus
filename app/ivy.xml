@@ -7,10 +7,8 @@
     </configurations>
 
     <dependencies>
-        <dependency>
-            <groupId>com.bugsense.trace</groupId>
-            <artifactId>bugsense</artifactId>
-            <version>3.2</version>
+        <dependency org="com.jakewharton" name="butterknife" rev="1.2.2" transitive="false">
+            <artifact name="butterknife" ext="jar" />
         </dependency>
-</dependencies>
+    </dependencies>
 </ivy-module>
