@@ -1,0 +1,16 @@
+<ivy-module version="2.0">
+    <info organisation="net.rdrei.android" module="scdl" revision="1.2" />
+
+    <configurations>
+        <conf name="compile" visibility="public" description="Compile dependencies"/>
+        <conf name="test" visibility="public" extends="compile" description="Compile tests"/>
+    </configurations>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.bugsense.trace</groupId>
+            <artifactId>bugsense</artifactId>
+            <version>3.2</version>
+        </dependency>
+</dependencies>
+</ivy-module>
