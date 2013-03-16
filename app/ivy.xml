@@ -21,6 +21,8 @@
 
     <dependencies>
 
+        <!-- Production dependencies -->
+
         <dependency
             name="butterknife"
             org="com.jakewharton"
@@ -64,6 +66,44 @@
             name="javax.inject"
             org="javax.inject"
             rev="1" />
+
+        <dependency
+            name="http-request"
+            org="com.github.kevinsawicki"
+            rev="3.0"
+            transitive="false" >
+
+            <artifact
+                name="http-request"
+                ext="jar" >
+            </artifact>
+        </dependency>
+
+        <!-- Test dependencies -->
+
+        <dependency
+            name="android"
+            conf="test->default"
+            org="android"
+            rev="4.2_r1" />
+
+        <dependency
+            name="junit"
+            conf="test->default"
+            org="junit"
+            rev="4.11" />
+
+        <dependency
+            name="fest-android"
+            conf="test->default"
+            org="com.squareup"
+            rev="1.0.1" />
+
+        <dependency
+            name="robolectric"
+            conf="test->default"
+            org="org.robolectric"
+            rev="2.0-alpha-1" />
     </dependencies>
 
 </ivy-module>
