@@ -40,34 +40,34 @@ public class MainActivity extends Activity implements
 
 	@Inject
 	StatusStore mStatusStore;
-	
+
 	private StatusResult mStatusResult;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		// Don't work with potential null-pointers.
 		mStatusResult = new StatusResult();
 
 		Views.inject(this);
 		ApplicationModule.getGraph().inject(this);
-		
+
 		getLoaderManager().initLoader(0, null, this);
 	}
-	
+
 	private void updateDisplay() {
 		if (mStatusResult.status == Status.UNKNOWN) {
 			mLoadingSpinner.setVisibility(View.VISIBLE);
-			
+
 			mStatusText.setVisibility(View.GONE);
 			mUpdatedLayout.setVisibility(View.GONE);
 		} else {
 			mLoadingSpinner.setVisibility(View.GONE);
 			displayStatus(mStatusResult.status);
 			displayUpdated(mStatusResult.updated);
-			
+
 			mStatusText.setVisibility(View.VISIBLE);
 			mUpdatedLayout.setVisibility(View.VISIBLE);
 		}
@@ -93,10 +93,13 @@ public class MainActivity extends Activity implements
 
 		mStatusText.setText(statusDisplay);
 	}
-	
+
 	private void displayUpdated(Date date) {
-		java.text.DateFormat dateFormat = DateFormat.getDateFormat(this);
-		mUpdatedText.setText(dateFormat.format(date));
+		final java.text.DateFormat timeFormat = DateFormat.getTimeFormat(this);
+		final java.text.DateFormat dateFormat = DateFormat.getDateFormat(this);
+		final String text = String.format("%s %s", dateFormat.format(date),
+				timeFormat.format(date));
+		mUpdatedText.setText(text);
 	}
 
 	@Override
@@ -108,7 +111,8 @@ public class MainActivity extends Activity implements
 	}
 
 	@Override
-	public void onLoadFinished(Loader<StatusResult> loader, StatusResult statusResult) {
+	public void onLoadFinished(Loader<StatusResult> loader,
+			StatusResult statusResult) {
 		Log.d(TAG, "New Status result receveid.");
 		mStatusResult = statusResult;
 		updateDisplay();
