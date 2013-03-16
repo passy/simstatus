@@ -1,14 +1,69 @@
-<ivy-module version="2.0">
-    <info organisation="net.rdrei.android" module="scdl" revision="1.2" />
+<ivy-module version="2.0" >
+
+    <info
+        module="scdl"
+        organisation="net.rdrei.android"
+        revision="1.2" />
 
     <configurations>
-        <conf name="compile" visibility="public" description="Compile dependencies"/>
-        <conf name="test" visibility="public" extends="compile" description="Compile tests"/>
+
+        <conf
+            name="compile"
+            description="Compile dependencies"
+            visibility="public" />
+
+        <conf
+            name="test"
+            description="Compile tests"
+            extends="compile"
+            visibility="public" />
     </configurations>
 
     <dependencies>
-        <dependency org="com.jakewharton" name="butterknife" rev="1.2.2" transitive="false">
-            <artifact name="butterknife" ext="jar" />
+
+        <dependency
+            name="butterknife"
+            org="com.jakewharton"
+            rev="1.2.2"
+            transitive="false" >
+
+            <artifact
+                name="butterknife"
+                ext="jar" />
         </dependency>
+
+        <dependency
+            name="bugsense"
+            org="com.bugsense.trace"
+            rev="3.2"
+            transitive="false" />
+
+        <dependency
+            name="dagger"
+            org="com.squareup.dagger"
+            rev="1.0-SNAPSHOT"
+            transitive="false" >
+
+            <artifact
+                name="dagger"
+                ext="jar" />
+        </dependency>
+
+        <dependency
+            name="dagger-compiler"
+            org="com.squareup.dagger"
+            rev="1.0-SNAPSHOT"
+            transitive="false" >
+
+            <artifact
+                name="dagger"
+                ext="jar" />
+        </dependency>
+
+        <dependency
+            name="javax.inject"
+            org="javax.inject"
+            rev="1" />
     </dependencies>
+
 </ivy-module>
