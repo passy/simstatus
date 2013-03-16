@@ -14,7 +14,7 @@ import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
 import android.os.Bundle;
-import android.text.format.DateFormat;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -95,10 +95,9 @@ public class MainActivity extends Activity implements
 	}
 
 	private void displayUpdated(Date date) {
-		final java.text.DateFormat timeFormat = DateFormat.getTimeFormat(this);
-		final java.text.DateFormat dateFormat = DateFormat.getDateFormat(this);
-		final String text = String.format("%s %s", dateFormat.format(date),
-				timeFormat.format(date));
+		final CharSequence text = DateUtils.getRelativeTimeSpanString(
+				date.getTime(), (new Date()).getTime(),
+				DateUtils.MINUTE_IN_MILLIS);
 		mUpdatedText.setText(text);
 	}
 
