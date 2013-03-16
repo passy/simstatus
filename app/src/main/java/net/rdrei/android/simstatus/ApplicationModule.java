@@ -20,5 +20,4 @@ public class ApplicationModule {
 	@Provides @Singleton StatusStore provideStatusStore() {
 		return new StatusStoreImpl();
 	}
-
 }

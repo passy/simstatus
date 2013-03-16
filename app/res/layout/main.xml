@@ -22,14 +22,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dip" />
+        android:layout_marginTop="32dp" />
 
     <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dip"
+        android:layout_marginTop="32dp"
         android:fontFamily="sans-serif"
         android:shadowColor="@android:color/black"
         android:shadowRadius="5"
@@ -59,7 +59,7 @@
             style="@style/TextInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dip"
+            android:layout_marginLeft="4dp"
             android:textIsSelectable="false"
             android:fontFamily="sans-serif-light" />
     </LinearLayout>
