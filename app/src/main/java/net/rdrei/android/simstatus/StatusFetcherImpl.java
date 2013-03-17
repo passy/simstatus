@@ -1,6 +1,6 @@
 package net.rdrei.android.simstatus;
 
-import net.rdrei.android.simstatus.StatusStore.Status;
+import net.rdrei.android.simstatus.StatusResult.Status;
 
 import com.github.kevinsawicki.http.HttpRequest;
 import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;

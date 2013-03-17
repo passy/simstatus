@@ -2,7 +2,7 @@ package net.rdrei.android.simstatus;
 
 import java.util.Date;
 
-import net.rdrei.android.simstatus.StatusStore.Status;
+import net.rdrei.android.simstatus.StatusResult.Status;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
@@ -17,6 +17,7 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 	public static int CACHE_TIME = 5 * 60 * 1000;
 	private static final String TAG = "SCS:StatusFetchTaskLoader";
 	private StatusResult mOldResult;
+	
 	private boolean mForceRefresh;
 
 	public StatusFetchTaskLoader(Context context) {
@@ -40,6 +41,7 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 		Log.d(TAG, "loadInBackground() finished with status " + status.toString());
 		return new StatusResult(status, new Date());
 	}
+	
 
 	@Override
 	public void deliverResult(StatusResult data) {
@@ -52,6 +54,10 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 		Log.d(TAG, "Delivering result.");
 		mOldResult = data;
 		super.deliverResult(data);
+	}
+	
+	public void setOldResult(StatusResult oldResult) {
+		mOldResult = oldResult;
 	}
 
 	private void showErrorNotification() {

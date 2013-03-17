@@ -4,12 +4,12 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import net.rdrei.android.simstatus.ApplicationModule;
+import net.rdrei.android.simstatus.Injector;
 import net.rdrei.android.simstatus.R;
 import net.rdrei.android.simstatus.StatusFetchTaskLoader;
 import net.rdrei.android.simstatus.StatusResult;
+import net.rdrei.android.simstatus.StatusResult.Status;
 import net.rdrei.android.simstatus.StatusStore;
-import net.rdrei.android.simstatus.StatusStore.Status;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
@@ -59,8 +59,11 @@ public class MainActivity extends Activity implements
 		// Don't work with potential null-pointers.
 		mStatusResult = new StatusResult();
 
-		ApplicationModule.getGraph().inject(this);
+		Injector.inject(this);
 		Views.inject(this);
+		
+		StatusResult loadedStatus = mStatusStore.loadStatus();
+		Log.d(TAG, "Loaded status: " + loadedStatus);
 
 		getLoaderManager().initLoader(LOADER, null, this);
 	}

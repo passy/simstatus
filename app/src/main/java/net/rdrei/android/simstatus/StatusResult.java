@@ -2,9 +2,15 @@ package net.rdrei.android.simstatus;
 
 import java.util.Date;
 
-import net.rdrei.android.simstatus.StatusStore.Status;
-
 public class StatusResult {
+	public enum Status {
+		YES,
+		NO,
+		MAYBE,
+		UNKNOWN,
+		ERROR
+	};
+	
 	public Status status;
 	public Date updated;
 
