@@ -18,5 +18,4 @@ public class MainActivityTest {
 				R.string.app_name);
 		assertEquals(appName, "Sim City Status");
 	}
-
 }

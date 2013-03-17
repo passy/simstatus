@@ -17,8 +17,11 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 
 	@Override
 	public StatusResult loadInBackground() {
+		Log.d(TAG, "sending request");
+		StatusFetcher fetcher = new StatusFetcherImpl();
+		final Status status = fetcher.fetchStatus();
 		Log.d(TAG, "loadInBackground() finished");
-		return new StatusResult(Status.MAYBE, new Date());
+		return new StatusResult(status, new Date());
 	}
 
 	@Override
