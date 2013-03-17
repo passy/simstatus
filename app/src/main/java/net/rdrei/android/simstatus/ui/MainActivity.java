@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.Views;
@@ -54,13 +55,15 @@ public class MainActivity extends Activity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
 		setContentView(R.layout.main);
 
 		Injector.inject(this);
 		Views.inject(this);
-		
+
 		mStatusResult = mStatusStore.loadStatus();
-		
+
 		getLoaderManager().initLoader(LOADER, null, this);
 	}
 
@@ -68,6 +71,9 @@ public class MainActivity extends Activity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+
+		MenuItem refreshItem = menu.findItem(R.id.menu_refresh);
+		refreshItem.setVisible(!mLoading);
 
 		return true;
 	}
@@ -86,13 +92,23 @@ public class MainActivity extends Activity implements
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void forceRefresh() {
-		mStatusResult.status = Status.UNKNOWN;
-		updateDisplay();
+	private void setLoading(boolean enabled) {
+		mLoading = enabled;
+		Log.d(TAG, "Loading set to " + enabled);
 
+		if (enabled) {
+			setProgressBarIndeterminateVisibility(true);
+		} else {
+			setProgressBarIndeterminateVisibility(false);
+		}
+
+		invalidateOptionsMenu();
+	}
+
+	private void forceRefresh() {
 		Bundle bundle = new Bundle();
 		bundle.putBoolean(FORCE_REFRESH, true);
-		getLoaderManager().restartLoader(LOADER, null, this);
+		getLoaderManager().restartLoader(LOADER, bundle, this);
 	}
 
 	private void updateDisplay() {
@@ -145,28 +161,30 @@ public class MainActivity extends Activity implements
 			Log.d(TAG, "Still loading, not creating new loader.");
 			return null;
 		}
-		
+
 		final boolean forceRefresh;
 
-		Log.d(TAG, "Creating new StatusFetchTaskLoader.");
-		mLoading = true;
+		setLoading(true);
 
 		if (args != null) {
 			forceRefresh = args.getBoolean(FORCE_REFRESH, false);
 		} else {
 			forceRefresh = false;
 		}
-		
-		StatusFetchTaskLoader loader = new StatusFetchTaskLoader(this, forceRefresh);
+
+		Log.d(TAG, "Creating new StatusFetchTaskLoader with force flag "
+				+ forceRefresh);
+		StatusFetchTaskLoader loader = new StatusFetchTaskLoader(this,
+				forceRefresh);
 		loader.setOldResult(mStatusResult);
-		
+
 		return loader;
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
-		
+
 		mStatusStore.saveStatus(mStatusResult);
 	}
 
@@ -175,7 +193,7 @@ public class MainActivity extends Activity implements
 			StatusResult statusResult) {
 		Log.d(TAG, "New Status result receveid: " + statusResult.toString());
 
-		mLoading = false;
+		setLoading(false);
 		mStatusResult = statusResult;
 		updateDisplay();
 	}
@@ -183,6 +201,6 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onLoaderReset(Loader<StatusResult> arg0) {
 		Log.d(TAG, "onLoaderReset");
-		mLoading = false;
+		setLoading(false);
 	}
 }
