@@ -3,6 +3,7 @@ package net.rdrei.android.simstatus;
 import net.rdrei.android.simstatus.StatusStore.Status;
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.github.kevinsawicki.http.HttpRequest.HttpRequestException;
 
 public class StatusFetcherImpl implements StatusFetcher {
 	
@@ -13,9 +14,18 @@ public class StatusFetcherImpl implements StatusFetcher {
 	 */
 	@Override
 	public Status fetchStatus() {
-		final String response = HttpRequest.get(URL).body();
+		HttpRequest response;
 		
-		return responseToStatus(response);
+		try {
+			response = HttpRequest.get(URL);
+			if (response.code() != 200) {
+				return Status.ERROR;
+			}
+		} catch (HttpRequestException err) {
+			return Status.ERROR;
+		}
+		
+		return responseToStatus(response.body());
 	}
 
 	private Status responseToStatus(String response) {

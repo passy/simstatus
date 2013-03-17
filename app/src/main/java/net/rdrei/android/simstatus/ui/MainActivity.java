@@ -112,7 +112,7 @@ public class MainActivity extends Activity implements
 	@Override
 	public void onLoadFinished(Loader<StatusResult> loader,
 			StatusResult statusResult) {
-		Log.d(TAG, "New Status result receveid.");
+		Log.d(TAG, "New Status result receveid: " + statusResult.toString());
 		mStatusResult = statusResult;
 		updateDisplay();
 	}

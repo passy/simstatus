@@ -7,14 +7,19 @@ import net.rdrei.android.simstatus.StatusStore.Status;
 public class StatusResult {
 	public Status status;
 	public Date updated;
-	
+
 	public StatusResult() {
 		this(Status.UNKNOWN, new Date(0));
 	}
-	
+
 	public StatusResult(Status status, Date updated) {
 		super();
 		this.status = status;
 		this.updated = updated;
+	}
+
+	@Override
+	public String toString() {
+		return "StatusResult [status=" + status + ", updated=" + updated + "]";
 	}
 }

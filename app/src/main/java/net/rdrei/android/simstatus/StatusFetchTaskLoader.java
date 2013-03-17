@@ -6,13 +6,30 @@ import net.rdrei.android.simstatus.StatusStore.Status;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
-	
+
+	/**
+	 * Time in which we won't request a new result unless explicitly requested
+	 * in seconds.
+	 */
+	public static int CACHE_TIME = 5 * 60 * 1000;
 	private static final String TAG = "SCS:StatusFetchTaskLoader";
+	private StatusResult mOldResult;
+	private boolean mForceRefresh;
 
 	public StatusFetchTaskLoader(Context context) {
+		this(context, false);
+	}
+
+	public StatusFetchTaskLoader(Context context, boolean forceRefresh) {
 		super(context);
+		Log.d(TAG, "Creating new loader task with force=" + forceRefresh);
+
+		mForceRefresh = forceRefresh;
+		// TODO: Load from store.
+		mOldResult = new StatusResult();
 	}
 
 	@Override
@@ -20,15 +37,42 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 		Log.d(TAG, "sending request");
 		StatusFetcher fetcher = new StatusFetcherImpl();
 		final Status status = fetcher.fetchStatus();
-		Log.d(TAG, "loadInBackground() finished");
+		Log.d(TAG, "loadInBackground() finished with status " + status.toString());
 		return new StatusResult(status, new Date());
+	}
+
+	@Override
+	public void deliverResult(StatusResult data) {
+		if (data.status == Status.ERROR) {
+			showErrorNotification();
+			super.deliverResult(mOldResult);
+			return;
+		}
+
+		mOldResult = data;
+		super.deliverResult(data);
+	}
+
+	private void showErrorNotification() {
+		Toast.makeText(getContext(), "Couldn't connect to the internet.",
+				Toast.LENGTH_SHORT).show();
+	}
+
+	private boolean needsRefresh() {
+		long diff = (new Date()).getTime() - mOldResult.updated.getTime();
+
+		return mForceRefresh || diff >= CACHE_TIME
+				|| mOldResult.status == Status.UNKNOWN;
 	}
 
 	@Override
 	protected void onStartLoading() {
 		super.onStartLoading();
-		
-		// At the moment, always force a new load.
-		forceLoad();
+
+		if (needsRefresh()) {
+			forceLoad();
+		} else {
+			deliverResult(mOldResult);
+		}
 	}
 }

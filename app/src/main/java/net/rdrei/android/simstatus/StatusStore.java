@@ -5,7 +5,8 @@ public interface StatusStore {
 		YES,
 		NO,
 		MAYBE,
-		UNKNOWN
+		UNKNOWN,
+		ERROR
 	};
 
 	public abstract Status getLastStatus();
