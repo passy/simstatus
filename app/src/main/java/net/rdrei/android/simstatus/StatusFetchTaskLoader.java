@@ -49,6 +49,7 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 			return;
 		}
 
+		Log.d(TAG, "Delivering result.");
 		mOldResult = data;
 		super.deliverResult(data);
 	}
@@ -70,8 +71,10 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 		super.onStartLoading();
 
 		if (needsRefresh()) {
+			Log.d(TAG, "Refresh required. Forcing load.");
 			forceLoad();
 		} else {
+			Log.d(TAG, "No refresh needed. Delivering old result.");
 			deliverResult(mOldResult);
 		}
 	}
