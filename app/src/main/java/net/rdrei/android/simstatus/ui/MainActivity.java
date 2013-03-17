@@ -56,15 +56,11 @@ public class MainActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		// Don't work with potential null-pointers.
-		mStatusResult = new StatusResult();
-
 		Injector.inject(this);
 		Views.inject(this);
 		
-		StatusResult loadedStatus = mStatusStore.loadStatus();
-		Log.d(TAG, "Loaded status: " + loadedStatus);
-
+		mStatusResult = mStatusStore.loadStatus();
+		
 		getLoaderManager().initLoader(LOADER, null, this);
 	}
 
@@ -161,7 +157,17 @@ public class MainActivity extends Activity implements
 			forceRefresh = false;
 		}
 		
-		return new StatusFetchTaskLoader(this, forceRefresh);
+		StatusFetchTaskLoader loader = new StatusFetchTaskLoader(this, forceRefresh);
+		loader.setOldResult(mStatusResult);
+		
+		return loader;
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
+		mStatusStore.saveStatus(mStatusResult);
 	}
 
 	@Override

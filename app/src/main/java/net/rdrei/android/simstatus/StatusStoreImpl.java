@@ -2,8 +2,6 @@ package net.rdrei.android.simstatus;
 
 import java.util.Date;
 
-import javax.inject.Inject;
-
 import net.rdrei.android.simstatus.StatusResult.Status;
 import android.content.SharedPreferences;
 
