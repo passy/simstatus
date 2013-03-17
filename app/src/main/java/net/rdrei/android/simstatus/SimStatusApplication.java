@@ -18,8 +18,8 @@ public class SimStatusApplication extends Application {
 		if (isDebuggable()) {
 			enableStrictMode();
 		} else {
-//			BugSenseHandler.initAndStartSession(this,
-//					getString(R.string.bugsense_token));
+			BugSenseHandler.initAndStartSession(this,
+					getString(R.string.bugsense_token));
 		}
 	}
 

@@ -88,6 +88,18 @@
                 ext="jar" >
             </artifact>
         </dependency>
+        
+        <dependency
+            name="admob"
+            org="com.google.android.admob"
+            rev="6.3.1"
+            transitive="false" >
+
+            <artifact
+                name="http-request"
+                ext="jar" >
+            </artifact>
+        </dependency>
 
         <!-- Test dependencies -->
 

@@ -2,6 +2,7 @@ package net.rdrei.android.simstatus;
 
 import javax.inject.Singleton;
 
+import net.rdrei.android.simstatus.ui.AdViewManagerFactory;
 import net.rdrei.android.simstatus.ui.MainActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,24 +19,29 @@ public class ApplicationModule {
 	}
 
 	@Provides
-	Context provideContext() {
+	private Context provideContext() {
 		return mContext;
 	}
 
 	@Provides
 	@Singleton
-	StatusStore provideStatusStore(SharedPreferences preferences) {
+	private StatusStore provideStatusStore(SharedPreferences preferences) {
 		return new StatusStoreImpl(preferences);
 	}
 
 	@Provides
-	StatusFetcher provideStatusFetcher() {
+	private StatusFetcher provideStatusFetcher() {
 		return new StatusFetcherImpl();
 	}
 
 	@Provides
-	SharedPreferences provideSharedPreferences() {
+	private SharedPreferences provideSharedPreferences() {
 		return mContext.getSharedPreferences(SHARED_PREFERENCES,
 				Context.MODE_PRIVATE);
+	}
+	
+	@Provides
+	private AdViewManagerFactory provideAdViewManagerFactory() {
+		return new AdViewManagerFactory();
 	}
 }

@@ -3,5 +3,7 @@
 <resources>
 
     <string name="app_name">Sim City Status</string>
+    <string name="admob_unit_id">a151462b9bbd58a</string>
+    <string name="bugsense_token">4352858214562d4d0842829</string>
 
 </resources>

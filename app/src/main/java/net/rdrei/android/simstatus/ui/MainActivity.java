@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
 import butterknife.InjectView;
@@ -42,12 +43,18 @@ public class MainActivity extends Activity implements
 
 	@InjectView(R.id.updated_layout)
 	View mUpdatedLayout;
+	
+	@InjectView(R.id.ad_layout)
+	ViewGroup mAdLayout;
 
 	@InjectView(R.id.updated)
 	TextView mUpdatedText;
 
 	@Inject
 	StatusStore mStatusStore;
+	
+	@Inject
+	AdViewManagerFactory mAdViewManagerFactory;
 
 	private StatusResult mStatusResult;
 	private boolean mLoading = false;
@@ -63,8 +70,13 @@ public class MainActivity extends Activity implements
 		Views.inject(this);
 
 		mStatusResult = mStatusStore.loadStatus();
-
 		getLoaderManager().initLoader(LOADER, null, this);
+		
+		showAds();
+	}
+
+	private void showAds() {
+		mAdViewManagerFactory.create(this).addToViewIfRequired(mAdLayout);
 	}
 
 	@Override
