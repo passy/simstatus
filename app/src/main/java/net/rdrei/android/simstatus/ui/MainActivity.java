@@ -12,6 +12,7 @@ import net.rdrei.android.simstatus.StatusResult.Status;
 import net.rdrei.android.simstatus.StatusStore;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -94,7 +95,7 @@ public class MainActivity extends Activity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_about:
-			Log.w(TAG, "Not implemented.");
+			launchAboutActivity();
 			return true;
 
 		case R.id.menu_refresh:
@@ -102,6 +103,11 @@ public class MainActivity extends Activity implements
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void launchAboutActivity() {
+		final Intent intent = new Intent(this, AboutActivity.class);
+		startActivity(intent);
 	}
 
 	private void setLoading(boolean enabled) {

@@ -63,16 +63,6 @@
         </dependency>
 
         <dependency
-            name="actionbarsherlock"
-            org="com.actionbarsherlock"
-            rev="4.2.0"
-            transitive="false">
-            <artifact
-                name="actionbarsherlock"
-                ext="apklib" />
-        </dependency>
-
-        <dependency
             name="javax.inject"
             org="javax.inject"
             rev="1" />
