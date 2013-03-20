@@ -25,7 +25,7 @@ public class StatusFetcherImpl implements StatusFetcher {
 			return Status.ERROR;
 		}
 		
-		return responseToStatus(response.body());
+		return responseToStatus(response.body().toUpperCase());
 	}
 
 	private Status responseToStatus(String response) {
