@@ -1,0 +1,35 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.stanfy.android:gradle-plugin-java-robolectric:2.0'
+    }
+}
+
+apply plugin: 'java-robolectric'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+javarob {
+    packageName = 'net.rdrei.android.simstatus'
+}
+
+test {
+    dependsOn ':simstatus:build'
+
+    scanForTestClasses = false
+    include "**/*Test.class"
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.10'
+    testCompile group: 'com.squareup', name: 'fest-android', version: '1.0.1'
+    testCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    testCompile group: 'org.robolectric', name: 'robolectric', version: '2.0-alpha-3-SNAPSHOT'
+    testCompile group: 'org.eclipse.jetty', name: 'jetty-server', version: '8.0.3.v20111011'
+}

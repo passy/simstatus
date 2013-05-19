@@ -1,1 +1,2 @@
 include ':simstatus'
+include ':test'
