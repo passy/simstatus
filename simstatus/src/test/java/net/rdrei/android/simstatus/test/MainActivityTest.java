@@ -13,7 +13,7 @@ public class MainActivityTest {
 	@Test
 	public void testSomething() {
 		final MainActivity activity = new MainActivity();
-		// final String appName = activity.getResources().getString(R.string.app_name);
-		// assertEquals(appName, "Sim City Status");
+		final String appName = activity.getResources().getString(R.string.app_name);
+		assertEquals(appName, "Sim City Status");
 	}
 }
