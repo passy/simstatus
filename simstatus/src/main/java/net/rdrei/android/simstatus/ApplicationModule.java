@@ -10,20 +10,11 @@ import net.rdrei.android.simstatus.ui.MainActivity;
 import javax.inject.Singleton;
 
 @Module(
-        injects = MainActivity.class
+        injects = MainActivity.class,
+        complete = false
 )
 public class ApplicationModule {
     private static final String SHARED_PREFERENCES = "simstatus";
-    private Context mContext;
-
-    public ApplicationModule(Context context) {
-        mContext = context;
-    }
-
-    @Provides
-    private Context provideContext() {
-        return mContext;
-    }
 
     @Provides
     @Singleton
@@ -37,8 +28,8 @@ public class ApplicationModule {
     }
 
     @Provides
-    private SharedPreferences provideSharedPreferences() {
-        return mContext.getSharedPreferences(SHARED_PREFERENCES,
+    private SharedPreferences provideSharedPreferences(@ForApplication Context context) {
+        return context.getSharedPreferences(SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
     }
 

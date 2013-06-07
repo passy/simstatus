@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements
 
 		setContentView(R.layout.main);
 
-		Injector.inject(this);
+        ((SimStatusApplication)getApplication()).inject(this);
 		Views.inject(this);
 
 		mStatusResult = mStatusStore.loadStatus();
@@ -73,6 +73,7 @@ public class MainActivity extends Activity implements
 	}
 
 	private void showAds() {
+        // TODO: Remove factory!!
 		mAdViewManagerFactory.create(this).addToViewIfRequired(mAdLayout);
 	}
 

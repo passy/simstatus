@@ -4,6 +4,6 @@ import android.app.Activity;
 
 public class AdViewManagerFactory {
 	public AdViewManager create(Activity activity) {
-		return new AdViewManager(activity);
+		return new AdViewManagerImpl(activity);
 	}
 }
