@@ -14,13 +14,13 @@ Screenshot courtesy of [ShapeItApp][shapeit]
 ## Building
 
 ```bash
-cd app
-ant ivy-init  # Only necessary once
-ant resolve  # Install and update deps via ivy
-ant installd
+./gradlew build
+./gradlew installDebug
 ```
 
 ## Unit Testing
+
+*Not working at the moment.*
 
 ```bash
 cd app
@@ -30,6 +30,8 @@ ant
 ```
 
 ## Integration Testing
+
+*Not working at the moment.*
 
 ```bash
 cd integration-tests
