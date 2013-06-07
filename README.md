@@ -20,23 +20,13 @@ Screenshot courtesy of [ShapeItApp][shapeit]
 
 ## Unit Testing
 
-*Not working at the moment.*
-
 ```bash
-cd app
-ant resolve-test
-cd ../unit-tests
-ant
+./gradlew check
 ```
 
 ## Integration Testing
 
 *Not working at the moment.*
-
-```bash
-cd integration-tests
-ant
-```
 
 ## License
 
