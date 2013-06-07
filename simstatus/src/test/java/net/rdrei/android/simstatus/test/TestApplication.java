@@ -8,6 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestApplication extends SimStatusApplication {
+    @Override
+    protected void setupBugSenseHandler() {
+        // no-op
+    }
+
     protected List<Object> getModules() {
         return Arrays.<Object>asList(
                 new AndroidModule(this),

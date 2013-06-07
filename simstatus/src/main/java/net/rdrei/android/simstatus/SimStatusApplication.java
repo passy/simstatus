@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.StrictMode;
+import com.bugsense.trace.BugSenseHandler;
 import dagger.ObjectGraph;
 import net.rdrei.android.simstatus.ui.AndroidModule;
 
@@ -30,8 +31,12 @@ public class SimStatusApplication extends Application {
         if (isDebuggable()) {
             enableStrictMode();
         } else {
-            // BugSenseHandler.initAndStartSession(this, getString(R.string.bugsense_token));
+            setupBugSenseHandler();
         }
+    }
+
+    protected void setupBugSenseHandler() {
+        BugSenseHandler.initAndStartSession(this, getString(R.string.bugsense_token));
     }
 
     public ObjectGraph getObjectGraph() {
