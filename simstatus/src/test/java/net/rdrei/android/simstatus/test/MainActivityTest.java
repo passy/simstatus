@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 import dagger.Module;
 import dagger.ObjectGraph;
 import dagger.Provides;
-import net.rdrei.android.simstatus.Injector;
 import net.rdrei.android.simstatus.R;
 import net.rdrei.android.simstatus.ui.AdViewManager;
 import net.rdrei.android.simstatus.ui.AdViewManagerFactory;
@@ -14,18 +13,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
+import org.robolectric.annotation.Config;
 
 import java.lang.Override;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Runner.class)
+@Config(manifest = "../test/TestManifest.xml")
 public class MainActivityTest {
 
     @Before
     public void setUpInjection() {
         ObjectGraph graph = ObjectGraph.create(new TestModule());
-        Injector.setModule(graph);
     }
 
     @Test
