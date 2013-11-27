@@ -2,6 +2,7 @@ package net.rdrei.android.simstatus.test;
 
 import android.app.Activity;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import dagger.Module;
 import dagger.ObjectGraph;
 import dagger.Provides;
@@ -14,13 +15,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+import org.robolectric.RobolectricTestRunner;
 
 import java.lang.Override;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(Runner.class)
-@Config(manifest = "../test/TestManifest.xml")
+@RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
 
     @Before
@@ -31,8 +32,8 @@ public class MainActivityTest {
     @Test
     public void testSomething() {
         final MainActivity activity = Robolectric.buildActivity(MainActivity.class).create().get();
-        final String appName = activity.getResources().getString(R.string.app_name);
-        assertEquals(appName, "Sim City Status");
+        final String appName = ((TextView) activity.findViewById(R.id.header)).getText().toString();
+        assertEquals(appName, "Is Sim City playable right now?");
     }
 
     public static class FakeAdViewManagerFactory extends AdViewManagerFactory {

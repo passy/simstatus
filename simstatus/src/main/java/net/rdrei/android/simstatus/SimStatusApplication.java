@@ -5,9 +5,9 @@ import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.StrictMode;
-import com.bugsense.trace.BugSenseHandler;
 import dagger.ObjectGraph;
 import net.rdrei.android.simstatus.ui.AndroidModule;
+import com.crashlytics.android.Crashlytics;
 
 import java.util.Arrays;
 
@@ -31,12 +31,12 @@ public class SimStatusApplication extends Application {
         if (isDebuggable()) {
             enableStrictMode();
         } else {
-            setupBugSenseHandler();
+            setupCrashlyticsHandler();
         }
     }
 
-    protected void setupBugSenseHandler() {
-        BugSenseHandler.initAndStartSession(this, getString(R.string.bugsense_token));
+    protected void setupCrashlyticsHandler() {
+        Crashlytics.start(this);
     }
 
     public ObjectGraph getObjectGraph() {
