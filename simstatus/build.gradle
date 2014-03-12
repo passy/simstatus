@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.android.tools.build:gradle:0.9.+'
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
 
@@ -39,18 +39,16 @@ sourceSets {
 }
 
 dependencies {
-    compile group: 'com.jakewharton', name: 'butterknife', version: '1.3.2'
-    compile group: 'com.squareup.dagger', name: 'dagger', version: '1.0.0'
+    compile group: 'com.jakewharton', name: 'butterknife', version: '4.0.1'
+    compile group: 'com.squareup.dagger', name: 'dagger', version: '1.2.1'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     compile group: 'com.github.kevinsawicki', name: 'http-request', version: '3.0'
-    compile group: 'com.bugsense.trace', name: 'bugsense', version: '3.5'
     compile group: 'com.google.android.admob', name: 'admob', version: '6.4.1'
 
-    testCompile group: 'com.jakewharton', name: 'butterknife', version: '1.3.2'
+    testCompile group: 'com.jakewharton', name: 'butterknife', version: '4.0.1'
     testCompile group: 'com.squareup.dagger', name: 'dagger', version: '1.0.0'
     testCompile group: 'javax.inject', name: 'javax.inject', version: '1'
-    testCompile group: 'com.github.kevinsawicki', name: 'http-request', version: '3.0'
-    testCompile group: 'com.bugsense.trace', name: 'bugsense', version: '3.5'
+    testCompile group: 'com.github.kevinsawicki', name: 'http-request', version: '5.6'
     testCompile group: 'com.google.android.admob', name: 'admob', version: '6.4.1'
     testCompile group: 'junit', name: 'junit', version: '4.11'
     testCompile group: 'com.squareup', name: 'fest-android', version: '1.0.7'
@@ -63,12 +61,12 @@ dependencies {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
         versionCode 100
         versionName "1.0.0-SNAPSHOT"
         minSdkVersion 14
-        targetSdkVersion 18
+        targetSdkVersion 19
     }
 }
