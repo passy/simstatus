@@ -8,7 +8,7 @@ import net.rdrei.android.simstatus.ui.AdViewManagerFactory;
 @Module(includes = ApplicationModule.class, overrides = true)
 public class TestModule {
     @Provides
-    private AdViewManagerFactory provideAdViewManagerFactory() {
+    public AdViewManagerFactory provideAdViewManagerFactory() {
         return new MainActivityTest.FakeAdViewManagerFactory();
     }
 }

@@ -55,7 +55,7 @@ public class MainActivityTest {
     @Module(injects = MainActivityTest.class)
     public static class TestModule {
         @Provides
-        private AdViewManagerFactory provideAdViewManagerFactory() {
+        public AdViewManagerFactory provideAdViewManagerFactory() {
             return new FakeAdViewManagerFactory();
         }
     }
