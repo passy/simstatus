@@ -18,23 +18,23 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    private StatusStore provideStatusStore(SharedPreferences preferences) {
+    public StatusStore provideStatusStore(SharedPreferences preferences) {
         return new StatusStoreImpl(preferences);
     }
 
     @Provides
-    private StatusFetcher provideStatusFetcher() {
+    public StatusFetcher provideStatusFetcher() {
         return new StatusFetcherImpl();
     }
 
     @Provides
-    private SharedPreferences provideSharedPreferences(@ForApplication Context context) {
+    public SharedPreferences provideSharedPreferences(@ForApplication Context context) {
         return context.getSharedPreferences(SHARED_PREFERENCES,
                 Context.MODE_PRIVATE);
     }
 
     @Provides
-    private AdViewManagerFactory provideAdViewManagerFactory() {
+    public AdViewManagerFactory provideAdViewManagerFactory() {
         return new AdViewManagerFactory();
     }
 }

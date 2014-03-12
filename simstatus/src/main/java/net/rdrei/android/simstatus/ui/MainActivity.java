@@ -9,8 +9,9 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.*;
 import android.widget.TextView;
+
+import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.Views;
 import net.rdrei.android.simstatus.*;
 import net.rdrei.android.simstatus.StatusResult.Status;
 
@@ -53,7 +54,7 @@ public class MainActivity extends Activity implements
         setContentView(R.layout.main);
 
         ((SimStatusApplication) getApplication()).inject(this);
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         mStatusResult = mStatusStore.loadStatus();
         getLoaderManager().initLoader(LOADER, null, this);

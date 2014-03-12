@@ -41,6 +41,7 @@ sourceSets {
 dependencies {
     compile group: 'com.jakewharton', name: 'butterknife', version: '4.0.1'
     compile group: 'com.squareup.dagger', name: 'dagger', version: '1.2.1'
+    provided group: 'com.squareup.dagger', name: 'dagger-compiler', version: '1.2.1'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     compile group: 'com.github.kevinsawicki', name: 'http-request', version: '3.0'
     compile group: 'com.google.android.admob', name: 'admob', version: '6.4.1'
