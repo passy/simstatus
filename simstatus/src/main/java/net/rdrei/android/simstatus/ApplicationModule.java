@@ -1,5 +1,6 @@
 package net.rdrei.android.simstatus;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import dagger.Module;

@@ -36,11 +36,14 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.junit.AfterClass;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
 /**
  * Base test case that provides a running HTTP server
  */
-public class ServerTestCase {
+public class TestServer {
 
 	/**
 	 * Simplified handler
