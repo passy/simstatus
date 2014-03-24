@@ -1,15 +1,6 @@
 package net.rdrei.android.simstatus.test;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
-import java.io.IOException;
-
-import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import net.rdrei.android.simstatus.SimStatusApplication;
 import net.rdrei.android.simstatus.StatusFetcher;
 import net.rdrei.android.simstatus.StatusFetcherImpl;
 import net.rdrei.android.simstatus.StatusResult.Status;
@@ -19,12 +10,27 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+
+import java.io.IOException;
+
+import javax.inject.Inject;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import dagger.Module;
 import dagger.ObjectGraph;
 import dagger.Provides;
 
-public class StatusFetcherTest extends ServerTestCase {
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+@RunWith(TestRunner.class)
+public class StatusFetcherTest extends TestServer {
 	@Inject
 	StatusFetcher mStatusFetcher;
 
@@ -33,7 +39,10 @@ public class StatusFetcherTest extends ServerTestCase {
 
 	@Before
 	public void setUpInjection() {
-		ObjectGraph.create(new TestModule()).inject(this);
+		final ObjectGraph objectGraph = ((SimStatusApplication) Robolectric.application).getObjectGraph();
+		objectGraph
+				.plus(new StatusFetcherModule())
+				.inject(this);
 	}
 
 	/**
@@ -73,7 +82,7 @@ public class StatusFetcherTest extends ServerTestCase {
 
 	@Test
 	public void testMaybeRequest() {
-		sHandler = new ServerTestCase.RequestHandler() {
+		sHandler = new TestServer.RequestHandler() {
 
 			@Override
 			public void handle(final Request request,
@@ -87,10 +96,10 @@ public class StatusFetcherTest extends ServerTestCase {
 		assertThat(status.toString(), is("MAYBE"));
 	}
 
-	@Module(injects = StatusFetcherTest.class)
-	public static class TestModule {
+	@Module(injects = {StatusFetcherTest.class})
+	public class StatusFetcherModule {
 		@Provides
-		StatusFetcher providesStatusFetcher() {
+		public StatusFetcher provideStatusFetcher() {
 			return new StatusFetcherImpl();
 		}
 	}

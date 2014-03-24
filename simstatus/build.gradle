@@ -5,37 +5,24 @@ buildscript {
         mavenCentral()
         mavenLocal()
         maven { url 'http://download.crashlytics.com/maven' }
-
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:0.9.+'
-        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
-
+        classpath 'com.novoda.gradle:robolectric-plugin:0.0.1-SNAPSHOT'
     }
 }
 
 apply plugin: 'android'
+apply plugin: 'robolectric'
 apply plugin: 'crashlytics'
-apply plugin: 'android-test'
 
 repositories {
     mavenLocal()
     mavenCentral()
-
-    maven {
-        url "http://www.bugsense.com/gradle/"
-    }
     maven { url 'http://download.crashlytics.com/maven' }
-
-}
-
-sourceSets {
-    testLocal {
-        java.srcDir file('src/test/java')
-        resources.srcDir file('src/test/resources')
-    }
 }
 
 dependencies {
@@ -45,19 +32,14 @@ dependencies {
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     compile group: 'com.github.kevinsawicki', name: 'http-request', version: '3.0'
     compile group: 'com.google.android.admob', name: 'admob', version: '6.4.1'
+    compile group: 'com.crashlytics.android', name: 'crashlytics', version: '1.+'
 
-    testCompile group: 'com.jakewharton', name: 'butterknife', version: '4.0.1'
-    testCompile group: 'com.squareup.dagger', name: 'dagger', version: '1.0.0'
-    testCompile group: 'javax.inject', name: 'javax.inject', version: '1'
-    testCompile group: 'com.github.kevinsawicki', name: 'http-request', version: '5.6'
-    testCompile group: 'com.google.android.admob', name: 'admob', version: '6.4.1'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile group: 'com.squareup', name: 'fest-android', version: '1.0.7'
-    testCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
-    testCompile group: 'org.eclipse.jetty', name: 'jetty-server', version: '8.0.3.v20111011'
-    testCompile group: 'org.robolectric', name: 'robolectric', version: '2.3-SNAPSHOT'
-    compile 'com.crashlytics.android:crashlytics:1.+'
-
+    provided 'org.robolectric:android-all:4.4_r1-robolectric-0'
+    androidTestCompile group: 'junit', name: 'junit', version: '4.11'
+    androidTestCompile group: 'com.squareup', name: 'fest-android', version: '1.0.7'
+    androidTestCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+    androidTestCompile group: 'org.eclipse.jetty', name: 'jetty-server', version: '8.0.3.v20111011'
+    androidTestCompile group: 'org.robolectric', name: 'robolectric', version: '2.3-SNAPSHOT'
 }
 
 android {
@@ -70,4 +52,37 @@ android {
         minSdkVersion 14
         targetSdkVersion 19
     }
+}
+
+
+// prevent the "superClassName is empty" error for classes not annotated as tests
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.*" // whatever Ant pattern matches your test class files
+}
+
+
+task addTest {
+    def src = ['src/test/java']
+    def file = file('simstatus-simstatus.iml')
+
+    doLast {
+        def parsedXml = (new XmlParser()).parse(file)
+        def node = parsedXml.component[1].content[0]
+        src.each {
+            def path = 'file://$MODULE_DIR$/' + "${it}"
+            def set = node.find { it.@url == path }
+            if (set == null) {
+                new Node(node, 'sourceFolder', ['url': 'file://$MODULE_DIR$/' + "${it}", 'isTestSource': "true"])
+                def writer = new StringWriter()
+                new XmlNodePrinter(new PrintWriter(writer)).print(parsedXml)
+                file.text = writer.toString()
+            }
+        }
+    }
+}
+
+// always do the addtest on prebuild
+gradle.projectsEvaluated {
+    preBuild.dependsOn(addTest)
 }
