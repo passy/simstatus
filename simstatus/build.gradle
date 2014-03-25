@@ -31,8 +31,8 @@ dependencies {
     provided group: 'com.squareup.dagger', name: 'dagger-compiler', version: '1.2.1'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     compile group: 'com.github.kevinsawicki', name: 'http-request', version: '3.0'
-    compile group: 'com.google.android.admob', name: 'admob', version: '6.4.1'
     compile group: 'com.crashlytics.android', name: 'crashlytics', version: '1.+'
+    compile group: 'com.google.android.gms', name: 'play-services', version: '4.2.42'
 
     // One for the IDE, one for the CLI. Sigh.
     robolectricCompile files('testlibs/robolectric-2.3-SNAPSHOT-jar-with-dependencies.jar')
