@@ -34,12 +34,17 @@ dependencies {
     compile group: 'com.google.android.admob', name: 'admob', version: '6.4.1'
     compile group: 'com.crashlytics.android', name: 'crashlytics', version: '1.+'
 
-    provided 'org.robolectric:android-all:4.4_r1-robolectric-0'
+    // One for the IDE, one for the CLI. Sigh.
+    robolectricCompile files('testlibs/robolectric-2.3-SNAPSHOT-jar-with-dependencies.jar')
+    androidTestProvided files('testlibs/robolectric-2.3-SNAPSHOT-jar-with-dependencies.jar')
+
+    // Shouldn't be necessary, but is.
+    androidTestProvided 'org.robolectric:android-all:4.4_r1-robolectric-0'
     androidTestCompile group: 'junit', name: 'junit', version: '4.11'
     androidTestCompile group: 'com.squareup', name: 'fest-android', version: '1.0.7'
     androidTestCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
     androidTestCompile group: 'org.eclipse.jetty', name: 'jetty-server', version: '8.0.3.v20111011'
-    androidTestCompile group: 'org.robolectric', name: 'robolectric', version: '2.3-SNAPSHOT'
+    // androidTestCompile group: 'org.robolectric', name: 'robolectric', version: '2.3-SNAPSHOT'
 }
 
 android {
