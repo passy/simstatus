@@ -1,2 +1,6 @@
 language: java
-script: ./gradlew robolectric
+install:
+  - TERM=dumb ./gradlew assemble
+
+script:
+  - TERM=dumb ./gradlew robolectric
