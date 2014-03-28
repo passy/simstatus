@@ -11,4 +11,4 @@ install:
   - TERM=dumb ./gradlew assemble
 
 script:
-  - TERM=dumb ./gradlew robolectric
+  - TERM=dumb ./gradlew robolectric --info
