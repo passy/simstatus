@@ -57,15 +57,31 @@ android {
         minSdkVersion 14
         targetSdkVersion 19
     }
-}
 
+    if ('assembleRelease' in gradle.startParameter.taskNames) {
+        signingConfigs {
+            release {
+                def console = System.console()
+                storeFile file(System.getenv('ANDROID_KEYSTORE'))
+                storePassword console.readPassword("\n\$ Enter store password: ").toString()
+                keyAlias System.getenv('ANDROID_KEY_ALIAS')
+                keyPassword console.readPassword("\n\$ Enter key password: ").toString()
+            }
+        }
+
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
 
 // prevent the "superClassName is empty" error for classes not annotated as tests
 tasks.withType(Test) {
     scanForTestClasses = false
     include "**/*Test.*" // whatever Ant pattern matches your test class files
 }
-
 
 task addTest {
     def src = ['src/test/java']
