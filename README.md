@@ -1,4 +1,4 @@
-# SimCity Server Status for Android
+# SimCity Server Status for Android [![Build Status](https://travis-ci.org/passy/simstatus.svg?branch=master)](https://travis-ci.org/passy/simstatus)
 
 See the server status of SimCity 5 at one glance.
 
