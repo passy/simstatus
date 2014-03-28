@@ -3,7 +3,7 @@ jdk: oraclejdk7
 
 before_install:
   - sudo apt-get install -qq libstdc++6:i386 lib32z1
-  - export COMPONENTS=platform-tools,extra-google-m2repository,extra-android-m2repository,android-19,extra-google-google_play_services,extra-android-support
+  - export COMPONENTS=platform-tools,extra-google-m2repository,extra-android-m2repository,android-19,extra-google-google_play_services,extra-android-support,build-tools-19.0.3
   - curl -L https://raw.github.com/embarkmobile/android-sdk-installer/bf7bee02793a81a0c5ffbf5988a12b43763d8a78/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS
   - source ~/.android-sdk-installer/env
 
