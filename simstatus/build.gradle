@@ -71,6 +71,11 @@ task addTest {
     def src = ['src/test/java']
     def file = file('simstatus-simstatus.iml')
 
+    if (!file.isFile()) {
+        logger.info('Could not find IML file, skipping.')
+        return
+    }
+
     doLast {
         def parsedXml = (new XmlParser()).parse(file)
         def node = parsedXml.component[1].content[0]
