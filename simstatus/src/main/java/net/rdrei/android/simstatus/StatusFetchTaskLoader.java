@@ -16,7 +16,7 @@ public class StatusFetchTaskLoader extends AsyncTaskLoader<StatusResult> {
 	 */
 	public static int CACHE_TIME = 5 * 60 * 1000;
 	private static final String TAG = "SCS:StatusFetchTaskLoader";
-	private static final String STATUS_URL = "http://sc5status.herokuapp.com/status";
+	private static final String STATUS_URL = "https://sc5status.herokuapp.com/status";
 	private StatusResult mOldResult;
 
 	private final boolean mForceRefresh;
