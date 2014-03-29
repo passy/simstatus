@@ -2,6 +2,7 @@ build
 .gradle
 build.log
 local.properties
+build-log.xml
 
 #IntelliJ IDEA
 .idea
