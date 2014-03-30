@@ -25,12 +25,16 @@
         <activity android:name=".ui.AboutActivity"/>
 
         <activity
-                android:name="com.google.ads.AdActivity"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
 
         <meta-data
                 android:name="com.crashlytics.ApiKey"
                 android:value="42446155f2e89a20e92b7053916b90dd9faccbc4"/>
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
