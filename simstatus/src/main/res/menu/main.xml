@@ -5,8 +5,8 @@
         android:id="@+id/menu_refresh"
         android:title="Refresh"
         android:icon="@drawable/ic_action_refresh"
-        android:showAsAction="ifRoom"/>
-    
+        android:showAsAction="never"/>
+
     <item
         android:id="@+id/menu_about"
         android:title="About"
