@@ -1,83 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@drawable/holo_background_light"
-    android:orientation="vertical"
-    android:padding="8dp" >
-
-    <TextView
-        android:id="@+id/header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="sans-serif-light"
-        android:text="Is Sim City playable right now?"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <ProgressBar
-        android:id="@+id/status_loading"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp" />
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif"
-        android:shadowColor="@android:color/black"
-        android:shadowRadius="5"
-        android:text="Maybe"
-        android:textAllCaps="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="42sp"
-        android:visibility="gone" />
-
-    <LinearLayout
-        android:id="@+id/updated_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="32dp"
-        android:visibility="gone" >
-
-        <TextView
-            style="@style/TextInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-light"
-            android:text="Last Update:" />
-
-        <TextView
-            android:id="@+id/updated"
-            style="@style/TextInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:fontFamily="sans-serif-light"
-            android:textIsSelectable="false" />
-    </LinearLayout>
-
-    <Space
+<android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-    <RelativeLayout
-        android:id="@+id/ad_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="bottom" >
-    </RelativeLayout>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/holo_background_light"
+                android:orientation="vertical"
+                android:padding="8dp">
 
-</LinearLayout>
+            <TextView
+                    android:id="@+id/header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Is Sim City playable right now?"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <ProgressBar
+                    android:id="@+id/status_loading"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp"/>
+
+            <TextView
+                    android:id="@+id/status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="sans-serif"
+                    android:shadowColor="@android:color/black"
+                    android:shadowRadius="5"
+                    android:text="Maybe"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="42sp"
+                    android:visibility="gone"/>
+
+            <LinearLayout
+                    android:id="@+id/updated_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="32dp"
+                    android:visibility="gone">
+
+                <TextView
+                        style="@style/TextInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Last Update:"/>
+
+                <TextView
+                        android:id="@+id/updated"
+                        style="@style/TextInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:fontFamily="sans-serif-light"
+                        android:textIsSelectable="false"/>
+            </LinearLayout>
+
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                    android:id="@+id/ad_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="bottom">
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>
