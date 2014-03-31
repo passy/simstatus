@@ -10,11 +10,13 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.jakewharton.sdkmanager:gradle-plugin:0.9.+'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
         classpath 'com.novoda.gradle:robolectric-plugin:0.0.1-SNAPSHOT'
     }
 }
 
+apply plugin: 'android-sdk-manager'
 apply plugin: 'android'
 apply plugin: 'robolectric'
 apply plugin: 'crashlytics'
